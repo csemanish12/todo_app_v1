@@ -1,7 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
+
+from .forms import *
 
 
 def index(request):
-    return HttpResponse("Hello, World!")
+    if request.method == "POST":
+        task = TaskForm(request.POST)
+        if task.is_valid():
+            task.save()
+    tasks = Task.objects.all()
+    return render(request, 'tasks/index.html', {'tasks': tasks})
