@@ -1,6 +1,6 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'tasks/style.css' %}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <!Doctype html>
 <html lang="en">
@@ -16,23 +16,55 @@
         {% csrf_token %}
     <input class="new-task" type="text" name="title" placeholder="Add a Task">
     </form>
+
+
     <br>
     <div class="Todo">
         <h2>Todo</h2>
         {% for task in tasks %}
+        {% if task.completed == False %}
+
+        <form id="completeForm" method="POST" action="complete/{{ task.id }}">
+             {% csrf_token %}
+        </form>
+        <form id="deleteForm" method="POST" action="delete/{{ task.id }}">
+             {% csrf_token %}
+        </form>
+
         <div class='task-list'>
             <i>{{ task }}</i>
             <div class="action-picker">
-                <i class="material-icons" >done</i>
-                <i class="material-icons">delete</i>
+
+                <i class="material-icons" onclick="document.getElementById('completeForm').submit()">done</i>
+                <i class="material-icons" >delete</i>
+
             </div>
 
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 
     <div class="completed">
         <h2>Completed</h2>
+                {% for task in tasks %}
+        {% if task.completed == True %}
+
+        <form id="deleteForm2" method="POST" action="delete/{{ task.id }}">
+             {% csrf_token %}
+        </form>
+
+        <div class='task-list'>
+            <i>{{ task }}</i>
+            <div class="action-picker">
+
+                <i class="material-icons" onclick="document.getElementById('deleteForm2').submit()">delete</i>
+
+            </div>
+
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 
