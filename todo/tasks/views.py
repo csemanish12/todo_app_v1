@@ -16,7 +16,6 @@ def complete(request, task_id):
     payload = request.POST.dict()
     if request.method == "POST":
         task = Task.objects.get(id=task_id)
-        print('payload==', payload)
         if payload.get('box') == 'complete':
             task.completed = True
         else:
@@ -26,11 +25,15 @@ def complete(request, task_id):
 
 
 def update(request, task_id):
-    pass
+    payload = request.POST.dict()
+    task = Task.objects.get(id=task_id)
+    if task:
+        task.title = payload.get('title')
+        task.save()
+        return redirect("/")
 
 
 def delete(request, task_id):
-    print('deleee==============')
     if request.method == "POST":
         task = Task.objects.get(id=task_id)
         if task:

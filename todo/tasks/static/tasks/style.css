@@ -40,6 +40,18 @@
     left: 2%;
     position: relative;
 }
+
+.task-title {
+    background: #72768a;
+    border: None;
+    font-size: 22px;
+}
+
+input[type=text]:focus {
+  border: None;
+  outline: None;
+}
+
 .task-action {
     left: 95%;
     position: sticky;
