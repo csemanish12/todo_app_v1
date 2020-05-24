@@ -11,6 +11,7 @@
 
 </head>
 <body>
+<h1 align="center">Todo App</h1> <br>
 <div class="container">
     <form method="POST" action="">
         {% csrf_token %}
@@ -36,7 +37,10 @@
             </div>
 
             <div class="task-name">
-                <i>{{ task }}</i>
+                <form name="updateForm" method="POST" action="update/{{task.id}}">
+                    {% csrf_token %}
+                    <input class="task-title" type="text" name="title" value="{{task.title}}">
+                </form>
             </div>
 
             <div class="task-action">
