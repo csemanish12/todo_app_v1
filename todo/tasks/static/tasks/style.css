@@ -24,16 +24,25 @@
     width: 100%;
     background: #72768a;
     padding: 18px;
-    margin: 6px 0;
+    margin: 6px ;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+
 }
 
-.task-list .del {
-    float:right;
+.task-picker {
+    left: 0%;
+    position: relative;
 }
 
-.task-list .action-picker {
-    float:right;
+.task-name {
+    left: 2%;
+    position: relative;
+}
+.task-action {
+    left: 95%;
+    position: sticky;
 }
 
 
