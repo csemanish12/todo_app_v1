@@ -36,7 +36,10 @@
             </div>
 
             <div class="task-name">
-                <i>{{ task }}</i>
+                <form name="updateForm" method="POST" action="update/{{task.id}}">
+                    {% csrf_token %}
+                    <input class="task-title" type="text" name="title" value="{{task.title}}">
+                </form>
             </div>
 
             <div class="task-action">
