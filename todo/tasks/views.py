@@ -13,6 +13,7 @@ def index(request):
 
 
 def complete(request, task_id):
+    print('============',request.POST)
     if request.method == "POST":
         task = Task.objects.get(id=task_id)
         if task:

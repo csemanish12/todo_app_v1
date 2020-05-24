@@ -1,6 +1,6 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'tasks/style.css' %}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <!Doctype html>
 <html lang="en">
@@ -14,7 +14,7 @@
 <div class="container">
     <form method="POST" action="">
         {% csrf_token %}
-    <input class="new-task" type="text" name="title" placeholder="Add a Task">
+        <input class="new-task" type="text" name="title" placeholder="Add a Task">
     </form>
 
 
@@ -25,19 +25,25 @@
         {% if task.completed == False %}
 
         <form id="completeForm" method="POST" action="complete/{{ task.id }}">
-             {% csrf_token %}
+            {% csrf_token %}
         </form>
         <form id="deleteForm" method="POST" action="delete/{{ task.id }}">
-             {% csrf_token %}
+            {% csrf_token %}
         </form>
 
         <div class='task-list'>
-            <i>{{ task }}</i>
-            <div class="action-picker">
 
-                <i class="material-icons" onclick="document.getElementById('completeForm').submit()">done</i>
+            <div class="task-picker">
+                <input type="checkbox" id="ch" name="check" value="on"
+                       onchange="document.getElementById('completeForm').submit()">
+            </div>
+
+            <div class="task-name">
+                <i>{{ task }}</i>
+            </div>
+
+            <div class="task-action">
                 <i class="material-icons" onclick="document.getElementById('deleteForm').submit()">delete</i>
-
             </div>
 
         </div>
@@ -47,19 +53,24 @@
 
     <div class="completed">
         <h2>Completed</h2>
-                {% for task in tasks %}
+        {% for task in tasks %}
         {% if task.completed == True %}
-
         <form id="deleteForm2" method="POST" action="delete/{{ task.id }}">
-             {% csrf_token %}
+            {% csrf_token %}
         </form>
 
-        <div class='task-list'>
-            <i>{{ task }}</i>
-            <div class="action-picker">
-
+        <div class="task-list">
+            <div class="task-picker">
+                <form method="POST" action="complete/{{task.id}}">
+                    {% csrf_token %}
+                    <strike><input type="checkbox" id="check" name="box" value="on" onchange="submit();"></strike>
+                </form>
+            </div>
+            <div class="task-name">
+                <i><strike>{{ task }}</strike></i>
+            </div>
+            <div class="task-action">
                 <i class="material-icons" onclick="document.getElementById('deleteForm2').submit()">delete</i>
-
             </div>
 
         </div>
