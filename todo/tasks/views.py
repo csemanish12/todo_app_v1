@@ -7,6 +7,7 @@ def index(request):
     if request.method == "POST":
         task = TaskForm(request.POST)
         if task.is_valid():
+            task.completed = False
             task.save()
     tasks = Task.objects.all()
     return render(request, 'tasks/index.html', {'tasks': tasks})
